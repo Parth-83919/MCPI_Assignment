@@ -1379,34 +1379,34 @@ void TIM7_IRQHandler(void){
  8000a32:	af00      	add	r7, sp, #0
 	static int flag=0;
 	//check if interrupt occuerd
-	if(TIM7->SR & TIM_SR_UIF){
+	count++;
  8000a34:	4b10      	ldr	r3, [pc, #64]	@ (8000a78 <TIM7_IRQHandler+0x48>)
- 8000a36:	691b      	ldr	r3, [r3, #16]
- 8000a38:	f003 0301 	and.w	r3, r3, #1
- 8000a3c:	2b00      	cmp	r3, #0
- 8000a3e:	d019      	beq.n	8000a74 <TIM7_IRQHandler+0x44>
+ 8000a36:	681b      	ldr	r3, [r3, #0]
+ 8000a38:	3301      	adds	r3, #1
+ 8000a3a:	4a0f      	ldr	r2, [pc, #60]	@ (8000a78 <TIM7_IRQHandler+0x48>)
+ 8000a3c:	6013      	str	r3, [r2, #0]
+	if(TIM7->SR & TIM_SR_UIF){
+ 8000a3e:	4b0f      	ldr	r3, [pc, #60]	@ (8000a7c <TIM7_IRQHandler+0x4c>)
+ 8000a40:	691b      	ldr	r3, [r3, #16]
+ 8000a42:	f003 0301 	and.w	r3, r3, #1
+ 8000a46:	2b00      	cmp	r3, #0
+ 8000a48:	d014      	beq.n	8000a74 <TIM7_IRQHandler+0x44>
 		//then clear(ack) the interrupt
 		TIM7->SR = ~TIM_SR_UIF;
- 8000a40:	4b0d      	ldr	r3, [pc, #52]	@ (8000a78 <TIM7_IRQHandler+0x48>)
- 8000a42:	f06f 0201 	mvn.w	r2, #1
- 8000a46:	611a      	str	r2, [r3, #16]
+ 8000a4a:	4b0c      	ldr	r3, [pc, #48]	@ (8000a7c <TIM7_IRQHandler+0x4c>)
+ 8000a4c:	f06f 0201 	mvn.w	r2, #1
+ 8000a50:	611a      	str	r2, [r3, #16]
 		//toggled the LED
 		if(flag == 0){
- 8000a48:	4b0c      	ldr	r3, [pc, #48]	@ (8000a7c <TIM7_IRQHandler+0x4c>)
- 8000a4a:	681b      	ldr	r3, [r3, #0]
- 8000a4c:	2b00      	cmp	r3, #0
- 8000a4e:	d10b      	bne.n	8000a68 <TIM7_IRQHandler+0x38>
+ 8000a52:	4b0b      	ldr	r3, [pc, #44]	@ (8000a80 <TIM7_IRQHandler+0x50>)
+ 8000a54:	681b      	ldr	r3, [r3, #0]
+ 8000a56:	2b00      	cmp	r3, #0
+ 8000a58:	d106      	bne.n	8000a68 <TIM7_IRQHandler+0x38>
 			LedOn(LED_BLUE);
- 8000a50:	200f      	movs	r0, #15
- 8000a52:	f7ff feb1 	bl	80007b8 <LedOn>
-			count++;
- 8000a56:	4b0a      	ldr	r3, [pc, #40]	@ (8000a80 <TIM7_IRQHandler+0x50>)
- 8000a58:	681b      	ldr	r3, [r3, #0]
- 8000a5a:	3301      	adds	r3, #1
- 8000a5c:	4a08      	ldr	r2, [pc, #32]	@ (8000a80 <TIM7_IRQHandler+0x50>)
- 8000a5e:	6013      	str	r3, [r2, #0]
+ 8000a5a:	200f      	movs	r0, #15
+ 8000a5c:	f7ff feac 	bl	80007b8 <LedOn>
 			flag=1;
- 8000a60:	4b06      	ldr	r3, [pc, #24]	@ (8000a7c <TIM7_IRQHandler+0x4c>)
+ 8000a60:	4b07      	ldr	r3, [pc, #28]	@ (8000a80 <TIM7_IRQHandler+0x50>)
  8000a62:	2201      	movs	r2, #1
  8000a64:	601a      	str	r2, [r3, #0]
 		else{
@@ -1420,15 +1420,15 @@ void TIM7_IRQHandler(void){
  8000a68:	200f      	movs	r0, #15
  8000a6a:	f7ff febb 	bl	80007e4 <LedOff>
 			flag=0;
- 8000a6e:	4b03      	ldr	r3, [pc, #12]	@ (8000a7c <TIM7_IRQHandler+0x4c>)
+ 8000a6e:	4b04      	ldr	r3, [pc, #16]	@ (8000a80 <TIM7_IRQHandler+0x50>)
  8000a70:	2200      	movs	r2, #0
  8000a72:	601a      	str	r2, [r3, #0]
 }
  8000a74:	bf00      	nop
  8000a76:	bd80      	pop	{r7, pc}
- 8000a78:	40001400 	.word	0x40001400
- 8000a7c:	20000078 	.word	0x20000078
- 8000a80:	20000070 	.word	0x20000070
+ 8000a78:	20000070 	.word	0x20000070
+ 8000a7c:	40001400 	.word	0x40001400
+ 8000a80:	20000078 	.word	0x20000078
 
 08000a84 <Reset_Handler>:
 

@@ -32,13 +32,13 @@ void TimerInit(uint32_t ms){
 void TIM7_IRQHandler(void){
 	static int flag=0;
 	//check if interrupt occuerd
+	count++;
 	if(TIM7->SR & TIM_SR_UIF){
 		//then clear(ack) the interrupt
 		TIM7->SR = ~TIM_SR_UIF;
 		//toggled the LED
 		if(flag == 0){
 			LedOn(LED_BLUE);
-			count++;
 			flag=1;
 		}
 		else{
